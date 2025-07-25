@@ -87,7 +87,24 @@ Quotes are stored in server/data/quotes.json
 Enter email in login form
 Receive OTP via Gmail
 Verify OTP → receive JWT token
+---
+
+## 📸 Screenshots
+
+### 1. Dynamic Insurance Form
+![Form Screenshot](./form.png)
+
+### 2. OTP Email Example
+![OTP Email](./otp-email.png)
+
+### 3. Quote Saved Confirmation
+![Quote Saved](./quote-saved.png)
+
+### 4. Saved Quotes File (`quotes.json`)
+![Quotes JSON](./quotes-json.png)
+
  Contact
 Author: Rajnish Anand
 Email: rajnisha975@gmail.com
+
 
