@@ -1,0 +1,30 @@
+[
+  {
+    "productType": "health",
+    "formFields": {
+      "age": "22",
+      "bmi": "78",
+      "preConditions": "yes"
+    }
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "age": "22",
+      "bmi": "78",
+      "preConditions": "yes"
+    },
+    "premium": 1500,
+    "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "age": "34",
+      "bmi": "78",
+      "preConditions": "sds"
+    },
+    "premium": 1500,
+    "risk": 1
+  }
+]
