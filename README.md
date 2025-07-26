@@ -1,17 +1,12 @@
-# Insurance Portal - Week 1 (Accenture PIP Task)
 
-## Overview
-A full-stack web application for dynamic insurance quoting. Built as part of Accenture PIP, this portal calculates custom insurance premiums and risk scores for 5 lines of business (LOBs):
+# 🛡️ Insurance Portal - Week 1 & 2 (Accenture PIP Task)
 
-- Health
-- Motor
-- Term Life
-- Property
-- Casualty
+## 🔍 Overview
+A full-stack web application for dynamically estimating insurance premiums and risks across various lines of business (LOBs). Built as part of Accenture PIP assignment.
 
 ---
 
-##  Tech Stack
+## 🏗 Tech Stack
 - **Frontend:** React (with Axios)
 - **Backend:** Node.js + Express
 - **Database:** Local JSON (mock backend)
@@ -19,92 +14,108 @@ A full-stack web application for dynamic insurance quoting. Built as part of Acc
 
 ---
 
-##  Week 1 Deliverables
+## 📦 Week 1 Deliverables
 
-### 1. Full Stack Web App Setup
+### ✅ 1. Full Stack Web App Setup
 - React app in `/client`
 - Node/Express server in `/server`
-- Local JSON files for data persistence
+- Local mock DB using `users.json`, `quotes.json`
 
-### 2. Dynamic Insurance Form
-- UI updates fields dynamically based on selected insurance type (LOB)
-- Supports 3+ input fields per LOB
+### ✅ 2. Dynamic Insurance Form
+- UI auto-adjusts fields based on selected LOB:
+  - Health
+  - Motor
+  - Life
+  - Property
+  - Casualty
 
-### 3. Email + OTP Authentication
-- Custom OTP system (no 3rd-party libraries)
-- Email sent using Gmail App Password
+### ✅ 3. Email + OTP Authentication
+- Custom backend logic (no 3rd-party login)
+- OTP email sent via Gmail + Nodemailer
 - OTP expires in 5 minutes
-- JWT token returned on success
+- JWT returned on successful verification
 
-### 4. Premium & Risk Calculation
-- `logic.js` module created in backend
-- Custom logic applied per LOB using user inputs
-- Risk and premium values added to each quote
+### ✅ 4. Initial Premium & Risk Logic
+- Created `logic.js` with logic for each LOB
+- Connected to backend `/save-quote` route
 
-### 5. Data Storage
-- Quotes saved in `server/data/quotes.json`
-- User login data stored in `server/data/users.json` (if extended)
+### ✅ 5. Data Storage
+- `quotes.json` and `users.json` store user data and quotes securely
 
 ---
 
-##  Quote Submission Workflow
-1. User selects insurance type
-2. Dynamic form appears
-3. On submit:
-   - Quote is sent to `/save-quote`
-   - Backend calculates premium & risk
-   - Saves quote to JSON file
-   - Frontend displays result to user
+## 🔄 Week 2 Enhancements
+
+### ✅ 1. Completed Premium & Risk Engine
+- Finalized risk/premium logic per LOB in `logic.js`
+- Dynamically calculated and shown in frontend after submission
+
+### ✅ 2. Quote Submission + User Tracking
+- Added `userEmail` field to all quotes
+- Quote stored with LOB, form data, premium, and risk values
+
+### ✅ 3. Address Suggestion System
+- Auto-suggest enabled for "Property" LOB
+- Typing in address field shows predefined suggestions
+- Selection updates address value in real-time
 
 ---
 
-##  Sample Logic (From `logic.js`)
+## 📤 Quote Submission Flow
+
+1. User enters email
+2. Selects insurance type
+3. Fills in LOB-specific form
+4. Submits → Premium & risk calculated
+5. Quote saved to backend and result displayed
+
+---
+
+## 🔍 Sample Logic (`logic.js`)
+
 ```js
 if (productType === "health") {
   if (formFields.age > 45) risk += 1.5;
   if (formFields.bmi > 30) premium += 500;
 }
-1. Clone the Repository
-git clone https://github.com/Rajnish-Anand1/insurance-portal.git
-cd insurance-portal
+```
 
-2. Start the Backend (Node.js)
+---
+
+## 🚀 How to Run
+
+```bash
+# Backend
 cd server
 npm install
 node index.js
-Server runs on: http://localhost:5000
-3. Start the Frontend (React)
+
+# Frontend
 cd client
 npm install
 npm start
-App runs on: http://localhost:3000
-4. Test Flow
-Open the app in browser
-Fill insurance form
-Submit to generate quote
-Quotes are stored in server/data/quotes.json
-5. (Optional) Test OTP Login
-Enter email in login form
-Receive OTP via Gmail
-Verify OTP → receive JWT token
+```
+
 ---
 
-## 📸 Screenshots
+## 📁 File Structure
 
-### 1. Dynamic Insurance Form
-![Form Screenshot](./form.png)
+```
+insurance-portal/
+├── client/           # React frontend
+│   └── src/components/InsuranceForm.js
+├── server/           # Node backend
+│   ├── index.js
+│   ├── otp.js
+│   ├── logic.js
+│   └── data/
+│       ├── users.json
+│       └── quotes.json
+```
 
-### 2. OTP Email Example
-![OTP Email](./otp-email.png)
+---
 
-### 3. Quote Saved Confirmation
-![Quote Saved](./quote-saved.png)
-
-### 4. Saved Quotes File (`quotes.json`)
-![Quotes JSON](./quotes-json.png)
-
- Contact
-Author: Rajnish Anand
-Email: rajnisha975@gmail.com
-
-
+## ✅ Status
+- [x] Week 1 Complete
+- [x] Week 2 Complete
+- [ ] Week 3 (Coming Up: Charts + Dashboard)
