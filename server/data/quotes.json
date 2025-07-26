@@ -26,5 +26,57 @@
     },
     "premium": 1500,
     "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "age": "24",
+      "bmi": "60",
+      "preConditions": "gvsv"
+    },
+    "premium": 1500,
+    "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "age": "23",
+      "bmi": "30",
+      "preConditions": "cancer"
+    },
+    "premium": 1000,
+    "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "age": "40",
+      "bmi": "30",
+      "preConditions": "cancer"
+    },
+    "premium": 1000,
+    "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "userEmail": "rajnisha975@gmail.com",
+      "age": "24",
+      "bmi": "30",
+      "preConditions": "cancer"
+    },
+    "premium": 1000,
+    "risk": 1
+  },
+  {
+    "productType": "property",
+    "formFields": {
+      "propertyType": "apartment",
+      "area": "1200",
+      "buildYear": "2015",
+      "address": "10 Downing Street, London"
+    },
+    "premium": 1000,
+    "risk": 1
   }
 ]
