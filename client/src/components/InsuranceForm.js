@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { FaPaperPlane, FaFileInvoiceDollar } from "react-icons/fa";
 
 const fieldsByLOB = {
   health: ["age", "bmi", "preConditions"],
   motor: ["carMake", "carYear", "mileage"],
   life: ["age", "smoker", "existingConditions"],
-  property: ["propertyType", "area", "buildYear", "address"],
+  property: ["propertyType", "area", "buildYear"],
   casualty: ["jobRisk", "location", "coverage"],
 };
 
 const mockAddresses = [
-  "221B Baker Street, London",
-  "742 Evergreen Terrace, Springfield",
-  "1600 Pennsylvania Avenue, Washington DC",
-  "10 Downing Street, London",
-  "Eiffel Tower, Paris",
-  "1 Hacker Way, Menlo Park"
+  "123 Main Street, Delhi",
+  "456 Park Avenue, Mumbai",
+  "789 Lakeview Road, Bangalore",
+  "22 Rajpath Marg, Jaipur",
+  "10 MG Road, Pune",
 ];
 
 export default function InsuranceForm() {
@@ -23,29 +23,35 @@ export default function InsuranceForm() {
   const [form, setForm] = useState({});
   const [premium, setPremium] = useState(null);
   const [risk, setRisk] = useState(null);
+  const [addressInput, setAddressInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleAddressInput = (e) => {
-    const value = e.target.value;
-    setForm({ ...form, address: value });
+  const handleAddressChange = (e) => {
+    const input = e.target.value;
+    setAddressInput(input);
+    setForm({ ...form, address: input });
 
-    const filtered = mockAddresses.filter((addr) =>
-      addr.toLowerCase().includes(value.toLowerCase())
-    );
-    setSuggestions(filtered);
+    if (input.length > 1) {
+      const filtered = mockAddresses.filter((addr) =>
+        addr.toLowerCase().includes(input.toLowerCase())
+      );
+      setSuggestions(filtered);
+    } else {
+      setSuggestions([]);
+    }
   };
 
-  const selectSuggestion = (suggestion) => {
-    setForm({ ...form, address: suggestion });
+  const handleAddressSelect = (selected) => {
+    setAddressInput(selected);
+    setForm({ ...form, address: selected });
     setSuggestions([]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const quoteData = {
       productType: lob,
       formFields: form,
@@ -63,70 +69,89 @@ export default function InsuranceForm() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Insurance Quote Generator</h2>
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-100 flex flex-col items-center justify-center p-4 space-y-8">
 
-      {/* 🔹 Add user email input */}
-      <div>
-        <input
-          type="email"
-          name="userEmail"
-          placeholder="Enter your email"
-          onChange={handleChange}
-          value={form.userEmail || ""}
-        />
+      <div className="bg-white rounded-2xl shadow-md p-8 w-full max-w-md">
+        <h2 className="text-xl font-bold text-center text-blue-800 mb-6">Insurance Product Form</h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4 relative">
+          <input
+            type="email"
+            name="userEmail"
+            placeholder="Enter your email"
+            onChange={handleChange}
+            value={form.userEmail || ""}
+            className="w-full px-4 py-2 border rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+
+          <select
+            onChange={(e) => setLob(e.target.value)}
+            value={lob}
+            className="w-full px-4 py-2 border rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            {Object.keys(fieldsByLOB).map((type) => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+          </select>
+
+          {fieldsByLOB[lob].map((field) => (
+            <input
+              key={field}
+              name={field}
+              placeholder={field}
+              onChange={handleChange}
+              value={form[field] || ""}
+              className="w-full px-4 py-2 border rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          ))}
+
+          {/* Address Autocomplete Field */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Enter Address"
+              value={addressInput}
+              onChange={handleAddressChange}
+              className="w-full px-4 py-2 border rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+            {suggestions.length > 0 && (
+              <ul className="absolute z-10 w-full bg-white border rounded-xl mt-1 shadow-md max-h-48 overflow-y-auto">
+                {suggestions.map((addr, idx) => (
+                  <li
+                    key={idx}
+                    onClick={() => handleAddressSelect(addr)}
+                    className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
+                  >
+                    {addr}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl transition duration-200"
+          >
+            <FaPaperPlane />
+            Submit
+          </button>
+        </form>
+
+        {premium !== null && risk !== null && (
+          <div className="mt-6 bg-gray-100 p-4 rounded-xl shadow-sm text-blue-900">
+            <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+              <FaFileInvoiceDollar /> Quote Summary
+            </h3>
+            <p><strong>Premium:</strong> ₹{premium}</p>
+            <p><strong>Risk Score:</strong> {risk}</p>
+          </div>
+        )}
       </div>
 
-      <label>Select Insurance Type:</label>
-      <select onChange={(e) => setLob(e.target.value)} value={lob}>
-        {Object.keys(fieldsByLOB).map((type) => (
-          <option key={type} value={type}>{type}</option>
-        ))}
-      </select>
-
-      <form onSubmit={handleSubmit}>
-        {fieldsByLOB[lob].map((field) =>
-          field === "address" ? (
-            <div key={field}>
-              <input
-                name={field}
-                placeholder="Start typing address"
-                onChange={handleAddressInput}
-                value={form["address"] || ""}
-              />
-              {suggestions.length > 0 && (
-                <ul style={{ background: "#f0f0f0", padding: "5px" }}>
-                  {suggestions.map((s, i) => (
-                    <li key={i} onClick={() => selectSuggestion(s)} style={{ cursor: "pointer" }}>
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ) : (
-            <div key={field}>
-              <input
-                name={field}
-                placeholder={field}
-                onChange={handleChange}
-                value={form[field] || ""}
-              />
-            </div>
-          )
-        )}
-        <button type="submit">Submit Quote</button>
-      </form>
-
-      <pre>{JSON.stringify(form, null, 2)}</pre>
-
-      {premium !== null && risk !== null && (
-        <div style={{ marginTop: "20px" }}>
-          <h3>📊 Quote Summary:</h3>
-          <p><strong>Premium:</strong> ₹{premium}</p>
-          <p><strong>Risk Score:</strong> {risk}</p>
-        </div>
-      )}
     </div>
   );
 }

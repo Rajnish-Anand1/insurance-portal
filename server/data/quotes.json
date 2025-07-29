@@ -78,5 +78,91 @@
     },
     "premium": 1000,
     "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {},
+    "premium": 1000,
+    "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "userEmail": "rajnisha975@gmail.com",
+      "age": "40",
+      "bmi": "30",
+      "preConditions": "cancer"
+    },
+    "premium": 1000,
+    "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "userEmail": "rajnisha975@gmail.com",
+      "age": "70",
+      "bmi": "30",
+      "preConditions": "cancer"
+    },
+    "premium": 1000,
+    "risk": 2.5
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "userEmail": "9504819483ma@gmail.com",
+      "age": "24",
+      "bmi": "30",
+      "preConditions": "cancer"
+    },
+    "premium": 1000,
+    "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "userEmail": "rajnisha975@gmail.com",
+      "age": "40",
+      "bmi": "30",
+      "preConditions": "cancer"
+    },
+    "premium": 1000,
+    "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "userEmail": "rajnisha975@gmail.com",
+      "age": "40",
+      "bmi": "30",
+      "preConditions": "cancer",
+      "address": "10 MG Road, Pune"
+    },
+    "premium": 1000,
+    "risk": 1
+  },
+  {
+    "productType": "health",
+    "formFields": {
+      "userEmail": "rajnisha975@gmail.com",
+      "age": "40",
+      "bmi": "30",
+      "preConditions": "cancer",
+      "address": "10 MG Road, Pune"
+    },
+    "premium": 1000,
+    "risk": 1
+  },
+  {
+    "productType": "life",
+    "formFields": {
+      "userEmail": "minakshisingh6251979@gmail.com",
+      "age": "24",
+      "smoker": "na",
+      "existingConditions": "yes",
+      "address": "10 MG Road, Pune"
+    },
+    "premium": 1000,
+    "risk": 1
   }
 ]
